@@ -38,7 +38,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()(
     persist(
         (set, get) => {
-            console.log('AuthStore initialized with API URL:', api.baseUrl);
+            // console.log('AuthStore initialized with API URL:', api.baseUrl);
             return {
                 user: null,
                 isAuthenticated: false,

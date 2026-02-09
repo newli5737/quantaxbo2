@@ -1,8 +1,9 @@
 import { io, Socket } from 'socket.io-client';
 import { API_URL } from './api';
 
-// Socket.io cần URL gốc (Không có /api/v1)
-const SOCKET_URL = API_URL.replace(/\/api\/v1\/?$/, '');
+// Vercel Proxy (Rewrites) không hỗ trợ WebSocket. 
+// Do đó ta cần dùng URL tuyệt đối cho Socket, còn HTTP dùng /api/v1
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || (API_URL.startsWith('http') ? API_URL.replace(/\/api\/v1\/?$/, '') : window.location.origin);
 
 class SocketService {
     private socket: Socket | null = null;
